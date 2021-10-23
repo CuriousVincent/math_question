@@ -11,11 +11,11 @@ class QuestionRepository {
 
   Future<GetQuestionsResp> getQuestions() async {
     final response = await questionService.getQuestions();
-    return GetQuestionsResp.fromJson(response);
+    return GetQuestionsResp.fromJson(response.data);
   }
 
   Future<SummitQuestionResp> summitQuestions() async {
     final response = await questionService.summitQuestions();
-    return SummitQuestionResp.fromJson(response);
+    return SummitQuestionResp.fromJson(response.data);
   }
 }

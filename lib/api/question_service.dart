@@ -9,12 +9,12 @@ class QuestionService {
   QuestionService({required this.apiClient});
 
   Future<Response> getQuestions() async {
-    final response = await apiClient.request("Questions");
+    final response = await apiClient.request("/getQuestions");
     return response;
   }
 
   Future<Response> summitQuestions() async {
-    final response = await apiClient.request("summitQuestions");
+    final response = await apiClient.request("/summitQuestions");
     return response;
   }
 }

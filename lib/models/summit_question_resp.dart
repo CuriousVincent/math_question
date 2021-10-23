@@ -2,7 +2,7 @@
 
 class SummitQuestionResp {
   SummitQuestionResp({
-    List<Data>? data,
+    List<Data> data = const [],
   }) {
     _data = data;
   }
@@ -11,18 +11,18 @@ class SummitQuestionResp {
     if (json['data'] != null) {
       _data = [];
       json['data'].forEach((v) {
-        _data?.add(Data.fromJson(v));
+        _data.add(Data.fromJson(v));
       });
     }
   }
-  List<Data>? _data;
+  late List<Data> _data;
 
-  List<Data>? get data => _data;
+  List<Data> get data => _data;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     if (_data != null) {
-      map['data'] = _data?.map((v) => v.toJson()).toList();
+      map['data'] = _data.map((v) => v.toJson()).toList();
     }
     return map;
   }

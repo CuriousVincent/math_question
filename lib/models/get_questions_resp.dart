@@ -2,7 +2,7 @@
 
 class GetQuestionsResp {
   GetQuestionsResp({
-    List<Questions>? questions,
+    List<Questions> questions = const [],
   }) {
     _questions = questions;
   }
@@ -11,18 +11,18 @@ class GetQuestionsResp {
     if (json['questions'] != null) {
       _questions = [];
       json['questions'].forEach((v) {
-        _questions?.add(Questions.fromJson(v));
+        _questions.add(Questions.fromJson(v));
       });
     }
   }
-  List<Questions>? _questions;
+  late List<Questions> _questions;
 
-  List<Questions>? get questions => _questions;
+  List<Questions> get questions => _questions;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     if (_questions != null) {
-      map['questions'] = _questions?.map((v) => v.toJson()).toList();
+      map['questions'] = _questions.map((v) => v.toJson()).toList();
     }
     return map;
   }
@@ -33,11 +33,11 @@ class GetQuestionsResp {
 /// difficulty : 1
 
 class Questions {
-  Questions({
-    int? id,
-    String? question,
-    int? difficulty,
-  }) {
+  Questions(
+    int id,
+    String question,
+    int difficulty,
+  ) {
     _id = id;
     _question = question;
     _difficulty = difficulty;
@@ -48,13 +48,13 @@ class Questions {
     _question = json['question'];
     _difficulty = json['difficulty'];
   }
-  int? _id;
-  String? _question;
-  int? _difficulty;
+  late int _id;
+  late String _question;
+  late int _difficulty;
 
-  int? get id => _id;
-  String? get question => _question;
-  int? get difficulty => _difficulty;
+  int get id => _id;
+  String get question => _question;
+  int get difficulty => _difficulty;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
