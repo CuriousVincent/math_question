@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:math_question/bloc/question_bloc.dart';
 import 'package:math_question/di/injection.dart';
 import 'package:math_question/models/get_questions_resp.dart';
@@ -17,7 +18,6 @@ class QuestionPage extends StatefulWidget {
 
 class _QuestionPageState extends State<QuestionPage> {
   final QuestionBloc questionBloc = getIt<QuestionBloc>();
-  List<Questions> question = [];
   final PageController controller = PageController(initialPage: 0);
   static const _kDuration = const Duration(milliseconds: 300);
   static const _kCurve = Curves.ease;
@@ -26,7 +26,7 @@ class _QuestionPageState extends State<QuestionPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    questionBloc.add(QuestionEvent.loadQuestions(questions: question));
+    questionBloc.add(QuestionEvent.loadQuestions());
   }
 
   @override
@@ -47,9 +47,8 @@ class _QuestionPageState extends State<QuestionPage> {
           state.when(
               initial: () {},
               initialDataLoad: () {
-                question = questionBloc.question;
                 textControllers = [];
-                for (int i = 0; i < question.length; i++) {
+                for (int i = 0; i < questionBloc.question.length; i++) {
                   final textController = TextEditingController();
                   textControllers.add(textController);
                 }
@@ -68,7 +67,7 @@ class _QuestionPageState extends State<QuestionPage> {
                   Text("完成十道題目可以解鎖獎勵"),
                   DotsIndicator(
                     controller: controller,
-                    itemCount: question.length,
+                    itemCount: questionBloc.question.length,
                     onPageSelected: (int page) {
                       controller.animateToPage(
                         page,
@@ -88,8 +87,8 @@ class _QuestionPageState extends State<QuestionPage> {
 
   List<Widget> getList() {
     final List<Widget> items = [];
-    for (int i = 0; i < question.length; i++) {
-      items.add(page(question[i], i + 1, textControllers[i]));
+    for (int i = 0; i < questionBloc.question.length; i++) {
+      items.add(page(questionBloc.question[i], i + 1, textControllers[i]));
     }
     return items;
   }
@@ -104,7 +103,9 @@ class _QuestionPageState extends State<QuestionPage> {
           children: [
             Text("編號 ${questions.id}"),
             Text("題目 $index"),
-            Text("難度 ${questions.difficulty}"),
+            Row(
+              children: difficulty(questions.difficulty),
+            ),
           ],
         ),
         Row(
@@ -122,7 +123,7 @@ class _QuestionPageState extends State<QuestionPage> {
         ),
         ElevatedButton(
           onPressed: () {
-            if (index == 10) {
+            if (index == questionBloc.question.length) {
               List<String> ans = [];
               textControllers.forEach((element) {
                 ans.add(element.text);
@@ -136,10 +137,44 @@ class _QuestionPageState extends State<QuestionPage> {
               );
             }
           },
-          child: index == 10 ? Text("提交回答") : Text("下一題"),
+          child: index == questionBloc.question.length
+              ? Text("提交回答")
+              : Text("下一題"),
         )
       ],
     );
+  }
+
+  List<Widget> difficulty(int difficulty) {
+    final List<Widget> items = [];
+    items.add(Text("難度"));
+
+    for (int i = 0; i < difficulty; i++) {
+      items.add(
+        ClipPath(
+          clipper: StarClipper(5),
+          child: Container(
+            height: 20,
+            width: 20,
+            color: Colors.red,
+          ),
+        ),
+      );
+    }
+    for (int i = 0; i < 5 - difficulty; i++) {
+      items.add(
+        ClipPath(
+          clipper: StarClipper(5),
+          child: Container(
+            height: 20,
+            width: 20,
+            color: Colors.grey,
+          ),
+        ),
+      );
+    }
+
+    return items;
   }
 }
 

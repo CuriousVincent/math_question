@@ -17,10 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$QuestionEventTearOff {
   const _$QuestionEventTearOff();
 
-  LoadQuestions loadQuestions({required List<Questions> questions}) {
-    return LoadQuestions(
-      questions: questions,
-    );
+  LoadQuestions loadQuestions() {
+    return const LoadQuestions();
   }
 
   SummitQuestion summitQuestion({required List<String> ans}) {
@@ -37,19 +35,19 @@ const $QuestionEvent = _$QuestionEventTearOff();
 mixin _$QuestionEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<Questions> questions) loadQuestions,
+    required TResult Function() loadQuestions,
     required TResult Function(List<String> ans) summitQuestion,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<Questions> questions)? loadQuestions,
+    TResult Function()? loadQuestions,
     TResult Function(List<String> ans)? summitQuestion,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Questions> questions)? loadQuestions,
+    TResult Function()? loadQuestions,
     TResult Function(List<String> ans)? summitQuestion,
     required TResult orElse(),
   }) =>
@@ -97,7 +95,6 @@ abstract class $LoadQuestionsCopyWith<$Res> {
   factory $LoadQuestionsCopyWith(
           LoadQuestions value, $Res Function(LoadQuestions) then) =
       _$LoadQuestionsCopyWithImpl<$Res>;
-  $Res call({List<Questions> questions});
 }
 
 /// @nodoc
@@ -110,77 +107,54 @@ class _$LoadQuestionsCopyWithImpl<$Res>
 
   @override
   LoadQuestions get _value => super._value as LoadQuestions;
-
-  @override
-  $Res call({
-    Object? questions = freezed,
-  }) {
-    return _then(LoadQuestions(
-      questions: questions == freezed
-          ? _value.questions
-          : questions // ignore: cast_nullable_to_non_nullable
-              as List<Questions>,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$LoadQuestions implements LoadQuestions {
-  const _$LoadQuestions({required this.questions});
-
-  @override
-  final List<Questions> questions;
+  const _$LoadQuestions();
 
   @override
   String toString() {
-    return 'QuestionEvent.loadQuestions(questions: $questions)';
+    return 'QuestionEvent.loadQuestions()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is LoadQuestions &&
-            const DeepCollectionEquality().equals(other.questions, questions));
+        (other.runtimeType == runtimeType && other is LoadQuestions);
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(questions));
-
-  @JsonKey(ignore: true)
-  @override
-  $LoadQuestionsCopyWith<LoadQuestions> get copyWith =>
-      _$LoadQuestionsCopyWithImpl<LoadQuestions>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<Questions> questions) loadQuestions,
+    required TResult Function() loadQuestions,
     required TResult Function(List<String> ans) summitQuestion,
   }) {
-    return loadQuestions(questions);
+    return loadQuestions();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<Questions> questions)? loadQuestions,
+    TResult Function()? loadQuestions,
     TResult Function(List<String> ans)? summitQuestion,
   }) {
-    return loadQuestions?.call(questions);
+    return loadQuestions?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Questions> questions)? loadQuestions,
+    TResult Function()? loadQuestions,
     TResult Function(List<String> ans)? summitQuestion,
     required TResult orElse(),
   }) {
     if (loadQuestions != null) {
-      return loadQuestions(questions);
+      return loadQuestions();
     }
     return orElse();
   }
@@ -218,13 +192,7 @@ class _$LoadQuestions implements LoadQuestions {
 }
 
 abstract class LoadQuestions implements QuestionEvent {
-  const factory LoadQuestions({required List<Questions> questions}) =
-      _$LoadQuestions;
-
-  List<Questions> get questions;
-  @JsonKey(ignore: true)
-  $LoadQuestionsCopyWith<LoadQuestions> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory LoadQuestions() = _$LoadQuestions;
 }
 
 /// @nodoc
@@ -292,7 +260,7 @@ class _$SummitQuestion implements SummitQuestion {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<Questions> questions) loadQuestions,
+    required TResult Function() loadQuestions,
     required TResult Function(List<String> ans) summitQuestion,
   }) {
     return summitQuestion(ans);
@@ -301,7 +269,7 @@ class _$SummitQuestion implements SummitQuestion {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<Questions> questions)? loadQuestions,
+    TResult Function()? loadQuestions,
     TResult Function(List<String> ans)? summitQuestion,
   }) {
     return summitQuestion?.call(ans);
@@ -310,7 +278,7 @@ class _$SummitQuestion implements SummitQuestion {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Questions> questions)? loadQuestions,
+    TResult Function()? loadQuestions,
     TResult Function(List<String> ans)? summitQuestion,
     required TResult orElse(),
   }) {

@@ -18,4 +18,14 @@ class QuestionRepository {
     final response = await questionService.summitQuestions();
     return SummitQuestionResp.fromJson(response.data);
   }
+
+  int checkCorrectAnswerNumber(List<String> ans, SummitQuestionResp resp) {
+    int count = 0;
+    for (int i = 0; i < ans.length; i++) {
+      if (ans[i] != "" && ans[i] == resp.data[i].answer) {
+        count++;
+      }
+    }
+    return count;
+  }
 }

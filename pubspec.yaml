@@ -19,6 +19,7 @@ dependencies:
   flutter_bloc: ^7.3.1
   freezed_annotation: ^0.15.0
   http_mock_adapter: ^0.3.2
+  flutter_custom_clippers: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -26,6 +27,7 @@ dev_dependencies:
   injectable_generator: ^1.5.2
   build_runner: ^2.1.4
   freezed: ^0.15.0+1
+  mockito: ^5.0.16
 
 flutter:
   uses-material-design: true
