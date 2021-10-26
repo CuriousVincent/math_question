@@ -21,13 +21,19 @@ dependencies:
   http_mock_adapter: ^0.3.2
   flutter_custom_clippers: ^2.0.0
 
+
 dev_dependencies:
   flutter_test:
+    sdk: flutter
+  flutter_driver:
     sdk: flutter
   injectable_generator: ^1.5.2
   build_runner: ^2.1.4
   freezed: ^0.15.0+1
   mockito: ^5.0.16
+  test: ^1.16.8
+  bloc_test: ^8.3.0
+
 
 flutter:
   uses-material-design: true
